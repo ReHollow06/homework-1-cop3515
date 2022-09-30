@@ -47,9 +47,9 @@ int main(void) {
   bool containsInt;
   bool containsSpecialCharacter;
 
-  for (int i = 1; i < NUM_FILES - 1; i++) {
+  for (int i = 0; i < NUM_FILES; i++) {
 
-    printf("Processing password file #%d\n\n\n", i + 1);
+    printf("<-------------Processing password file #%d------------->\n\n\n", i + 1);
 
     for (int j = 0; j < 6; j++) {
       fscanf(passFiles[i], "%d", &params[j]);
@@ -142,10 +142,49 @@ int main(void) {
           passedTests[2] = 1;
         }
 
+        if (passedTests[0] == 1 && passedTests[1] == 1 && passedTests[2] == 1){
+          requiredTestsPassed = true;
+        }
+
+        // PRINTING RESULTS OF REQUIRED TESTS
+        printf("Required Tests: ");
         for (int j = 0; j < 3; j++) {
           printf("(%d)", passedTests[j]);
-          passedTests[j] = -1;
+          if (passedTests[j] == 1){
+            numRequiredTestsPassed++;
+          }
         }
+        printf(" || Passed: %d", numRequiredTestsPassed);
+        printf("\n\n");
+        // PRINTING RESULTS OF REQUIRED TESTS END
+        
+        for (int j = 0; j < 3; j++) { // interpreting results from passedTests
+          //printf("(%d)", passedTests[j]);
+          if (passedTests[j] == 0)
+          {
+            switch (j)
+            {
+            case 0:
+              printf("Password must be atleast %d characters long\n\n", minPasswordLength);
+              break;
+            case 1:
+              printf("Password must be fewer than %d characters\n\n", maxPasswordLength);
+              break;
+            case 2: 
+              printf("The password may not contain sequence of three or more repeated "
+                    "characters\n\n");
+            default:
+              break;
+            }
+          }
+        }
+        
+        if (requiredTestsPassed) {
+          printf("Password is strong - Accepted\n");
+        } else {
+          printf("Password failed - It cannot be used\n");
+        }
+
         printf("\n\n\n");
       }
 
@@ -187,7 +226,8 @@ int main(void) {
           if (passedTests[0] == 1 && passedTests[1] == 1 && passedTests[2] == 1){
             requiredTestsPassed = true;
           }
-
+          
+          // PRINTING RESULTS OF REQUIRED TESTS
           printf("Required Tests: ");
 
           for (int j = 0; j < 3; j++) {
@@ -198,12 +238,35 @@ int main(void) {
           }
 
           printf(" || Passed: %d", numRequiredTestsPassed);
-          printf("\n");
+          printf("\n\n");
+          // PRINTING RESULTS OF REQUIRED TESTS END
 
+          for (int j = 0; j < 3; j++) { // interpreting results from passedTests
+            //printf("(%d)", passedTests[j]);
+            if (passedTests[j] == 0)
+            {
+              switch (j)
+              {
+              case 0:
+                printf("Password must be atleast %d characters long\n\n", minPasswordLength);
+                break;
+              case 1:
+                printf("Password must be fewer than %d characters\n\n", maxPasswordLength);
+                break;
+              case 2: 
+                printf("The password may not contain sequence of three or more repeated "
+                      "characters\n\n");
+              default:
+                break;
+              }
+            }
+          }
 
           if (requiredTestsPassed)
           {
             printf("Password is strong - Accepted\n");
+          } else {
+            printf("Password failed - It cannot be used\n");
           }
           
           printf("\n\n\n");
@@ -266,6 +329,44 @@ int main(void) {
             passedTests[2] = 1;
           }
 
+          // PRINTING RESULTS OF REQUIRED TESTS
+          printf("Required Tests: ");
+
+          for (int j = 0; j < 3; j++) {
+            printf("(%d)", passedTests[j]);
+            if (passedTests[j] == 1){
+              numRequiredTestsPassed++;
+            }
+          }
+
+          printf(" || Passed: %d", numRequiredTestsPassed);
+          printf("\n");
+          // PRINTING RESULTS OF REQUIRED TESTS END
+        
+          // PRINTING RESULTS OF OPTIONAL TESTS
+          printf("Optional Tests: ");
+          int numPassedOptionalTests = 0;
+
+          for (int j = 3; j < 3 + numOptionalTests; j++)
+          {
+            if (passedTests[j] == -1)
+            {
+              passedTests[j] = 0;
+            } 
+          }
+          
+
+          for (int j = 3; j < 3 + numOptionalTests; j++) { // counts number of optional tests passed
+            printf("(%d)", passedTests[j]);
+            if (passedTests[j] == 1) {
+              numPassedOptionalTests++;
+            }
+          }
+          printf(" || Passed: %d", numPassedOptionalTests);
+          // PRINTING RESULTS OF OPTIONAL TESTS END
+
+          printf("\n\n");
+
           for (int j = 0; j < 3; j++) { // interpreting results from passedTests
             //printf("(%d)", passedTests[j]);
             if (passedTests[j] == 0)
@@ -292,25 +393,6 @@ int main(void) {
             requiredTestsPassed = true;
           }
           
-          printf("Optional Tests (%d): ", numOptionalTests);
-          int numPassedOptionalTests = 0;
-
-          for (int j = 3; j < 3 + numOptionalTests; j++)
-          {
-            if (passedTests[j] == -1)
-            {
-              passedTests[j] = 0;
-            } 
-          }
-          
-
-          for (int j = 3; j < 3 + numOptionalTests; j++) { // counts number of optional tests passed
-            printf("(%d)", passedTests[j]);
-            if (passedTests[j] == 1) {
-              numPassedOptionalTests++;
-            }
-          }
-          printf(" || Passed: %d\n\n", numPassedOptionalTests);
 
           for (int j = 3; j < 3 + numOptionalTests; j++) {
             if (passedTests[j] == 0){
@@ -335,10 +417,10 @@ int main(void) {
           }
 
           if ((numOptionalTests == numPassedOptionalTests) && requiredTestsPassed){
-            printf("Password is strong - Accepted");
+            printf("Password is strong - Accepted\n");
           }
           else if (numOptionalTests != numPassedOptionalTests || !requiredTestsPassed){
-            printf("Password failed - It cannot be used");
+            printf("Password failed - It cannot be used\n");
           }
 
           printf("\n\n\n");
