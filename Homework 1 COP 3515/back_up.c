@@ -108,7 +108,7 @@ int main(void) {
           continue;
         }
 
-        printf("Potential Password(len:%d): %s\n", stringLength, singleLine);
+        printf("Potential Password(length:%d): %s\n", stringLength, singleLine);
         for (int j = 0; j < stringLength - 2; j++) {
           if (singleLine[j] == singleLine[j + 1] && // checks for repeating characters
               singleLine[j] == singleLine[j + 2]) {
@@ -192,7 +192,7 @@ int main(void) {
         if (stringLength == 0) {
           continue;
         }
-        printf("Potential Password(len:%d): %s\n", stringLength, singleLine);
+        printf("Potential Password(length:%d): %s\n", stringLength, singleLine);
         for (int j = 0; j < stringLength; j++) {
           if (singleLine[j] == ' ') {
             isPassPhrase = true;
@@ -248,13 +248,10 @@ int main(void) {
               switch (j)
               {
               case 0:
-                printf("Password must be atleast %d characters long\n\n", minPasswordLength);
-                break;
-              case 1:
-                printf("Password must be fewer than %d characters\n\n", maxPasswordLength);
+                printf("Passphrase must be atleast %d characters long\n\n", minPassPhraseLength);
                 break;
               case 2: 
-                printf("The password may not contain sequence of three or more repeated "
+                printf("The passphrase may not contain sequence of three or more repeated "
                       "characters\n\n");
               default:
                 break;
@@ -264,9 +261,9 @@ int main(void) {
 
           if (requiredTestsPassed)
           {
-            printf("Password is strong - Accepted\n");
+            printf("Pass phrase is strong - Accepted\n");
           } else {
-            printf("Password failed - It cannot be used\n");
+            printf("Pass phrase failed - It cannot be used\n");
           }
           
           printf("\n\n\n");
