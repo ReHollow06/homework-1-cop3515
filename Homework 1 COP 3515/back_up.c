@@ -3,7 +3,6 @@
  *
  * Homework #1: Password Strength Meter
  *
- * Name: Ritvik Komaragiri
  */
 
 #include <stdbool.h>
